@@ -9,11 +9,13 @@ class Assignment extends Component {
     render() {
         const {currentText, imageName, onChange} = this.props;
         return (
-            <span>
-                <img src={imageName} alt={imageName || "n/a"} />
+            <div className="assignment">
+                <img src={imageName} alt={imageName || "n/a"}/>
                 <br/>
-                <input ref={(input) => { this.nameInput = input; }} type="text" onKeyUp={onChange} value={currentText}/>
-            </span>
+                <input ref={(input) => {
+                    this.nameInput = input;
+                }} type="text" onKeyUp={onChange} value={currentText}/>
+            </div>
         )
     }
 
@@ -28,6 +30,7 @@ const randomAssignment = () => {
 
 class Assignments extends Component {
     state = {
+        nrOfRuns: 20,
         showAssignment: true,
         currentText: "",
         currentAssignment: randomAssignment(),
@@ -56,11 +59,12 @@ class Assignments extends Component {
                     currentText: "",
                     currentAssignment: randomAssignment(),
                     previousAssignment: writtenText,
-                    showAssignment: false
+                    showAssignment: false,
+                    nrOfRuns: this.state.nrOfRuns-1,
                 });
-                setTimeout(function(){
+                setTimeout(function () {
                     this.setState({showAssignment: true});
-                }.bind(this), 1000)
+                }.bind(this), 2000)
             } else if (upperCaseTargetText.startsWith(upperCaseWrittenText)) {
                 this.setState({
                     currentText: writtenText
@@ -72,18 +76,20 @@ class Assignments extends Component {
     }
 
     render() {
-        const {currentAssignment, currentText, showAssignment} = this.state;
+        const {currentAssignment, currentText, showAssignment, nrOfRuns, previousAssignment} = this.state;
 
         return (
             <div className="container">
-                {showAssignment && <Assignment
+                {showAssignment && nrOfRuns !== 0 && <Assignment
                     currentText={currentText}
                     imageName={currentAssignment}
                     onChange={this.change.bind(this)}
                 /> }
                 {!showAssignment && <div className="previousAssignment">
-                    <h1>{this.state.previousAssignment}</h1>
+                    <h1>{previousAssignment}</h1>
                 </div>}
+                {showAssignment && nrOfRuns !== 0 && <h1>{nrOfRuns}</h1>}
+                {showAssignment && nrOfRuns === 0 && <h1>Slut!</h1>}
             </div>
         )
     }
