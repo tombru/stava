@@ -20,7 +20,7 @@ class Assignment extends Component {
 }
 
 // const assignments = ["T-Centralen", "Slussen", "Universitetet", "Skolan", "Västertorp", "Isabell", "Hiss", "Fruängen", "Buss", "Jessy", "Pappa", "Mamma", "Matti", "Sko", "Elefant", "Mälarhöjden", "Liljeholmen", "Tunnelbana", "Prins Onsdag", "Eksätravägen", "Nyponsoppa", "Bil", "Vagn", "Mormor"];
-const assignments = ["bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg","sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
+const assignments = ["spöke.jpg","badhus.jpg","borrmaskin.jpg","choklad.jpg","cykelvagn.jpg","dammsugare.jpg","dator.jpg","gitarr.jpeg","lekplats.jpg","makaroner.jpg","mannagrynsgröt.jpg","nudlar.jpg","ostbågar.jpg","studsmatta.png","tandborste.jpg","tandkräm.jpg","ugnspannkaka.jpg","yoghurt.jpg","sol.png", "glasögon.png", "dinosaurie.jpg", "cykel.jpg", "fiskespö.jpg", "lastbil.jpg", "flygplan.jpg", "giraff.jpg", "häst.jpg", "percy.png","bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg","sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
 
 const randomAssignment = () => {
     return assignments[Math.floor(Math.random() * assignments.length)]
@@ -82,7 +82,7 @@ class Assignments extends Component {
                     onChange={this.change.bind(this)}
                 /> }
                 {!showAssignment && <div className="previousAssignment">
-                    <h4>{this.state.previousAssignment}</h4>
+                    <h1>{this.state.previousAssignment}</h1>
                 </div>}
             </div>
         )
@@ -90,4 +90,3 @@ class Assignments extends Component {
 }
 
 export default Assignments;
-
