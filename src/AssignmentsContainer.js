@@ -55,7 +55,7 @@ class AssignmentsContainer extends Component {
 
     constructor(props) {
         super(props);
-        this.change = this.change.bind(this)
+        this.onInputChange = this.onInputChange.bind(this)
     }
 
     state = {
