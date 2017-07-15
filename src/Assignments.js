@@ -2,7 +2,7 @@ import React, {Component} from "react";
 
 class Assignment extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.nameInput.focus();
     }
 
@@ -22,20 +22,26 @@ class Assignment extends Component {
 }
 
 // const assignments = ["T-Centralen", "Slussen", "Universitetet", "Skolan", "Västertorp", "Isabell", "Hiss", "Fruängen", "Buss", "Jessy", "Pappa", "Mamma", "Matti", "Sko", "Elefant", "Mälarhöjden", "Liljeholmen", "Tunnelbana", "Prins Onsdag", "Eksätravägen", "Nyponsoppa", "Bil", "Vagn", "Mormor"];
-const assignments = ["spöke.jpg","badhus.jpg","borrmaskin.jpg","choklad.jpg","cykelvagn.jpg","dammsugare.jpg","dator.jpg","gitarr.jpeg","lekplats.jpg","makaroner.jpg","mannagrynsgröt.jpg","nudlar.jpg","ostbågar.jpg","studsmatta.png","tandborste.jpg","tandkräm.jpg","ugnspannkaka.jpg","yoghurt.jpg","sol.png", "glasögon.png", "dinosaurie.jpg", "cykel.jpg", "fiskespö.jpg", "lastbil.jpg", "flygplan.jpg", "giraff.jpg", "häst.jpg", "percy.png","bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg","sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
+const assignments = ["spöke.jpg", "badhus.jpg", "borrmaskin.jpg", "choklad.jpg", "cykelvagn.jpg", "dammsugare.jpg", "dator.jpg", "gitarr.jpeg", "lekplats.jpg", "makaroner.jpg", "mannagrynsgröt.jpg", "nudlar.jpg", "ostbågar.jpg", "studsmatta.png", "tandborste.jpg", "tandkräm.jpg", "ugnspannkaka.jpg", "yoghurt.jpg", "sol.png", "glasögon.png", "dinosaurie.jpg", "cykel.jpg", "fiskespö.jpg", "lastbil.jpg", "flygplan.jpg", "giraff.jpg", "häst.jpg", "percy.png", "bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg", "sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
 
 
 class Assignments extends Component {
+
+    constructor(props) {
+        super(props);
+        this.change = this.change.bind(this)
+    }
+
     state = {
         assignments: assignments,
-        nrOfRuns: 20,
+        nrOfRunsLeft: 20,
         showAssignment: true,
         currentText: "",
         currentAssignment: Assignments.pickRandom(assignments),
         previousAssignment: ""
     };
 
-    static pickRandom(a)  {
+    static pickRandom(a) {
         return a[Math.floor(Math.random() * a.length)]
     };
 
@@ -64,7 +70,7 @@ class Assignments extends Component {
                     currentAssignment: Assignments.pickRandom(undoneAssignments),
                     previousAssignment: writtenText,
                     showAssignment: false,
-                    nrOfRuns: this.state.nrOfRuns-1,
+                    nrOfRunsLeft: this.state.nrOfRunsLeft - 1,
                 });
                 setTimeout(function () {
                     this.setState({showAssignment: true});
@@ -76,24 +82,31 @@ class Assignments extends Component {
             }
         }
 
-
     }
 
     render() {
-        const {currentAssignment, currentText, showAssignment, nrOfRuns, previousAssignment} = this.state;
-
+        const {currentAssignment, currentText, showAssignment, nrOfRunsLeft, previousAssignment} = this.state;
         return (
             <div className="container">
-                {showAssignment && nrOfRuns !== 0 && <Assignment
-                    currentText={currentText}
-                    imageName={currentAssignment}
-                    onChange={this.change.bind(this)}
-                /> }
-                {!showAssignment && <div className="previousAssignment">
-                    <h1>{previousAssignment}</h1>
-                </div>}
-                {showAssignment && nrOfRuns !== 0 && <h4>{nrOfRuns}</h4>}
-                {showAssignment && nrOfRuns === 0 && <h1>Slut!</h1>}
+                {showAssignment &&
+                    <span>
+                        {nrOfRunsLeft !== 0 &&
+                            <span>
+                                <Assignment
+                                    currentText={currentText}
+                                    imageName={currentAssignment}
+                                    onChange={this.change}
+                                />
+                                <h4>{nrOfRunsLeft}</h4>
+                            </span>}
+                        {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
+                    </span>
+                }
+                {!showAssignment &&
+                    <div className="previousAssignment">
+                        <h1>{previousAssignment}</h1>
+                    </div>
+                }
             </div>
         )
     }
