@@ -71,7 +71,7 @@ class AssignmentsContainer extends Component {
         return a[Math.floor(Math.random() * a.length)]
     };
 
-    change(event) {
+    onInputChange(event) {
         const writtenText = event.target.value;
         const {currentAssignment, assignments} = this.state;
         const targetText = currentAssignment.substring(0, currentAssignment.indexOf(".")).replace("_", " ");
@@ -102,7 +102,7 @@ class AssignmentsContainer extends Component {
         return (
             <Assignments
                 {...this.state}
-                onChange={this.change}
+                onChange={this.onInputChange}
             />
         )
     }
