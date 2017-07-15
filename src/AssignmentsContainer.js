@@ -16,7 +16,7 @@ class Assignment extends Component {
                 <br/>
                 <input ref={(input) => {
                     this.nameInput = input;
-                }} type="text" onKeyUp={onChange} value={currentText}/>
+                }} type="text" onChange={onChange} value={currentText}/>
             </div>
         )
     }
@@ -71,41 +71,29 @@ class AssignmentsContainer extends Component {
         return a[Math.floor(Math.random() * a.length)]
     };
 
-    change(proxy) {
-        const {currentText, currentAssignment, assignments} = this.state;
+    change(event) {
+        const writtenText = event.target.value;
+        const {currentAssignment, assignments} = this.state;
         const targetText = currentAssignment.substring(0, currentAssignment.indexOf(".")).replace("_", " ");
-        const {key} = proxy;
-        if (key === "Backspace") {
+        const upperCaseTargetText = targetText.toUpperCase();
+        const upperCaseWrittenText = writtenText.toUpperCase();
+        if (upperCaseTargetText === upperCaseWrittenText) {
+            const undoneAssignments = assignments.filter(assignment => assignment !== currentAssignment);
             this.setState({
-                currentText: currentText.substring(0, currentText.length - 1)
-            })
-        } else {
-            const writtenText = currentText + key;
-            const upperCaseTargetText = targetText.toUpperCase();
-            const upperCaseWrittenText = writtenText.toUpperCase();
-            if (currentText === "") {
-                this.setState({
-                    previousAssignment: ""
-                });
-            }
-            if (upperCaseTargetText === upperCaseWrittenText) {
-                const undoneAssignments = assignments.filter(assignment => assignment !== currentAssignment);
-                this.setState({
-                    assignments: undoneAssignments,
-                    currentText: "",
-                    currentAssignment: AssignmentsContainer.pickRandom(undoneAssignments),
-                    previousAssignment: writtenText,
-                    showAssignment: false,
-                    nrOfRunsLeft: this.state.nrOfRunsLeft - 1,
-                });
-                setTimeout(function () {
-                    this.setState({showAssignment: true});
-                }.bind(this), 2000)
-            } else if (upperCaseTargetText.startsWith(upperCaseWrittenText)) {
-                this.setState({
-                    currentText: writtenText
-                });
-            }
+                assignments: undoneAssignments,
+                currentText: "",
+                currentAssignment: AssignmentsContainer.pickRandom(undoneAssignments),
+                previousAssignment: writtenText,
+                showAssignment: false,
+                nrOfRunsLeft: this.state.nrOfRunsLeft - 1,
+            });
+            setTimeout(function () {
+                this.setState({showAssignment: true});
+            }.bind(this), 2000)
+        } else if (upperCaseTargetText.startsWith(upperCaseWrittenText)) {
+            this.setState({
+                currentText: writtenText
+            });
         }
 
     }
