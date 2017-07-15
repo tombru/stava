@@ -29,17 +29,17 @@ function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsL
         <div className="container">
             {showAssignment &&
             <span>
-                        {nrOfRunsLeft !== 0 &&
+                {nrOfRunsLeft !== 0 &&
                         <span>
-                                <Assignment
-                                    currentText={currentText}
-                                    imageName={currentAssignment}
-                                    onChange={onChange}
-                                />
-                                <h4>{nrOfRunsLeft}</h4>
-                            </span>}
+                            <Assignment
+                                currentText={currentText}
+                                imageName={currentAssignment}
+                                onChange={onChange}
+                            />
+                            <h4>{nrOfRunsLeft}</h4>
+                        </span>}
                 {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
-                    </span>
+            </span>
             }
             {!showAssignment &&
             <div className="previousAssignment">
