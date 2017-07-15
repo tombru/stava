@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import Assignments  from "./Assignments";
+import AssignmentsContainer  from "./AssignmentsContainer";
 
 function App() {
     return (
         <div className="App">
-            <Assignments />
+            <AssignmentsContainer />
         </div>
     )
 
