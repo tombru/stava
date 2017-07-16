@@ -28,23 +28,23 @@ function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsL
     return (
         <div className="container">
             {showAssignment &&
-            <span>
-                {nrOfRunsLeft !== 0 &&
-                        <span>
-                            <Assignment
-                                currentText={currentText}
-                                imageName={currentAssignment}
-                                onChange={onChange}
-                            />
-                            <h4>{nrOfRunsLeft}</h4>
-                        </span>}
-                {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
-            </span>
+                <span>
+                    {nrOfRunsLeft !== 0 &&
+                            <span>
+                                <Assignment
+                                    currentText={currentText}
+                                    imageName={currentAssignment}
+                                    onChange={onChange}
+                                />
+                                <h4>{nrOfRunsLeft}</h4>
+                            </span>}
+                    {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
+                </span>
             }
             {!showAssignment &&
-            <div className="previousAssignment">
-                <h1>{previousAssignment}</h1>
-            </div>
+                <div className="previousAssignment">
+                    <h1>{previousAssignment}</h1>
+                </div>
             }
         </div>
     )
@@ -71,10 +71,18 @@ class AssignmentsContainer extends Component {
         return a[Math.floor(Math.random() * a.length)]
     };
 
+    static targetText(currentAssignment) {
+        return currentAssignment.substring(0, currentAssignment.indexOf(".")).replace("_", " ");
+    }
+
     onInputChange(event) {
         const writtenText = event.target.value;
-        const {currentAssignment, assignments} = this.state;
-        const targetText = currentAssignment.substring(0, currentAssignment.indexOf(".")).replace("_", " ");
+        this.handleWrittenText(writtenText);
+    }
+
+    handleWrittenText(writtenText) {
+        const {currentAssignment, assignments, nrOfRunsLeft} = this.state;
+        const targetText = AssignmentsContainer.targetText(currentAssignment);
         const upperCaseTargetText = targetText.toUpperCase();
         const upperCaseWrittenText = writtenText.toUpperCase();
         if (upperCaseTargetText === upperCaseWrittenText) {
@@ -85,7 +93,7 @@ class AssignmentsContainer extends Component {
                 currentAssignment: AssignmentsContainer.pickRandom(undoneAssignments),
                 previousAssignment: writtenText,
                 showAssignment: false,
-                nrOfRunsLeft: this.state.nrOfRunsLeft - 1,
+                nrOfRunsLeft: nrOfRunsLeft - 1,
             });
             setTimeout(function () {
                 this.setState({showAssignment: true});
@@ -95,7 +103,6 @@ class AssignmentsContainer extends Component {
                 currentText: writtenText
             });
         }
-
     }
 
     render() {
