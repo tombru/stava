@@ -1,55 +1,7 @@
 import React, {Component} from "react";
+import Assignments from "./Assignments"
 
 const assignments = ["spöke.jpg", "badhus.jpg", "borrmaskin.jpg", "choklad.jpg", "cykelvagn.jpg", "dammsugare.jpg", "dator.jpg", "gitarr.jpeg", "lekplats.jpg", "makaroner.jpg", "mannagrynsgröt.jpg", "nudlar.jpg", "ostbågar.jpg", "studsmatta.png", "tandborste.jpg", "tandkräm.jpg", "ugnspannkaka.jpg", "yoghurt.jpg", "sol.png", "glasögon.png", "dinosaurie.jpg", "cykel.jpg", "fiskespö.jpg", "lastbil.jpg", "flygplan.jpg", "giraff.jpg", "häst.jpg", "percy.png", "bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg", "sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
-
-class Assignment extends Component {
-
-    componentDidMount() {
-        this.nameInput.focus();
-    }
-
-    render() {
-        const {currentText, imageName, onChange} = this.props;
-        return (
-            <div className="assignment">
-                <img src={imageName} alt={imageName || "n/a"}/>
-                <br/>
-                <input ref={(input) => {
-                    this.nameInput = input;
-                }} type="text" onChange={onChange} value={currentText}/>
-            </div>
-        )
-    }
-
-}
-
-
-function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsLeft, previousAssignment, onChange }) {
-    return (
-        <div className="container">
-            {showAssignment &&
-                <span>
-                    {nrOfRunsLeft !== 0 &&
-                            <span>
-                                <Assignment
-                                    currentText={currentText}
-                                    imageName={currentAssignment}
-                                    onChange={onChange}
-                                />
-                                <h4>{nrOfRunsLeft}</h4>
-                            </span>}
-                    {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
-                </span>
-            }
-            {!showAssignment &&
-                <div className="previousAssignment">
-                    <h1>{previousAssignment}</h1>
-                </div>
-            }
-        </div>
-    )
-
-}
 
 class AssignmentsContainer extends Component {
 
