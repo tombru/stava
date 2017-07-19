@@ -25,7 +25,7 @@ class AssignmentsContainer extends Component {
         const upperCaseTargetText = targetText.toUpperCase();
         const upperCaseWrittenText = writtenText.toUpperCase();
         if (upperCaseTargetText === upperCaseWrittenText) {
-            approveAnswer();
+            approveAnswer(writtenText);
         } else if (upperCaseTargetText.startsWith(upperCaseWrittenText)) {
             updateAnswer(writtenText);
         }
