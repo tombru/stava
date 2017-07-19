@@ -1,0 +1,2 @@
+fatta dispatch/thunk
+borde inte behöva thunk?

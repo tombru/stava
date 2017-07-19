@@ -12,7 +12,12 @@ class AssignmentsContainer extends Component {
     }
 
     static targetText(currentFilename) {
-        return currentFilename.substring(0, currentFilename.indexOf(".")).replace("_", " ");
+        const part = currentFilename.substring(currentFilename.indexOf("-") + 1, currentFilename.length);
+        return part.substring(0, part.indexOf(".")).replace("_", " ");
+    }
+
+    static question(currentFilename) {
+        return currentFilename.substring(0, currentFilename.indexOf("-"));
     }
 
     onInputChange(event) {
@@ -42,6 +47,7 @@ class AssignmentsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
+    question: AssignmentsContainer.question(state.assignments.currentFilename),
     targetText: AssignmentsContainer.targetText(state.assignments.currentFilename),
     previousText: AssignmentsContainer.targetText(state.assignments.previousFilename),
     currentFilename: state.assignments.currentFilename,

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-// import { speakSwedish } from "./speak"
+import { speakSwedish } from "./speak"
 
 class Assignment extends Component {
 
     componentDidMount() {
         this.nameInput.focus();
-        // speakSwedish("Matti, vad är det för någonting?")
+        const { question }  = this.props;
+        speakSwedish(question);
     }
 
     render() {
