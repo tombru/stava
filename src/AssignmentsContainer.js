@@ -13,11 +13,11 @@ class AssignmentsContainer extends Component {
 
     static targetText(currentFilename) {
         const part = currentFilename.substring(currentFilename.indexOf("-") + 1, currentFilename.length);
-        return part.substring(0, part.indexOf(".")).replace("_", " ");
+        return part.substring(0, part.indexOf(".")).replace("_", " ").trim();
     }
 
     static question(currentFilename) {
-        return currentFilename.substring(0, currentFilename.indexOf("-"));
+        return currentFilename.substring(0, currentFilename.indexOf("-")).trim();
     }
 
     onInputChange(event) {
