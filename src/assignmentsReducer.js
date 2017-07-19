@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             const undoneAssignments = assignments.filter(assignment => assignment !== currentFilename);
             return {
                 ...state,
-                assignment: undoneAssignments,
+                assignments: undoneAssignments,
                 currentFilename: pickRandom(undoneAssignments),
                 nrOfRunsLeft: nrOfRunsLeft - 1,
                 showAssignment: false,
