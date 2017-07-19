@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 class Assignment extends Component {
 
@@ -7,10 +7,10 @@ class Assignment extends Component {
     }
 
     render() {
-        const {currentText, imageName, onChange} = this.props;
+        const { currentText, filename, onChange } = this.props;
         return (
             <div className="assignment">
-                <img src={imageName} alt={imageName || "n/a"}/>
+                <img src={filename} alt={filename || "n/a"}/>
                 <br/>
                 <input ref={(input) => {
                     this.nameInput = input;

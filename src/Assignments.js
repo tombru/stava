@@ -1,7 +1,7 @@
 import React from "react";
 import Assignment from "./Assignment"
 
-function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsLeft, previousAssignment, onChange }) {
+function Assignments({ currentFilename, currentText, showAssignment, nrOfRunsLeft, previousText, onChange }) {
     return (
         <div className="container">
             {showAssignment &&
@@ -10,7 +10,7 @@ function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsL
                             <span>
                                 <Assignment
                                     currentText={currentText}
-                                    imageName={currentAssignment}
+                                    filename={currentFilename}
                                     onChange={onChange}
                                 />
                                 <h4>{nrOfRunsLeft}</h4>
@@ -20,7 +20,7 @@ function Assignments({ currentAssignment, currentText, showAssignment, nrOfRunsL
             }
             {!showAssignment &&
                 <div className="previousAssignment">
-                    <h1>{previousAssignment}</h1>
+                    <h1>{previousText}</h1>
                 </div>
             }
         </div>

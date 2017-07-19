@@ -1,7 +1,8 @@
-import React, {Component} from "react";
-import Assignments from "./Assignments"
-
-const assignments = ["spöke.jpg", "badhus.jpg", "borrmaskin.jpg", "choklad.jpg", "cykelvagn.jpg", "dammsugare.jpg", "dator.jpg", "gitarr.jpeg", "lekplats.jpg", "makaroner.jpg", "mannagrynsgröt.jpg", "nudlar.jpg", "ostbågar.jpg", "studsmatta.png", "tandborste.jpg", "tandkräm.jpg", "ugnspannkaka.jpg", "yoghurt.jpg", "sol.png", "glasögon.png", "dinosaurie.jpg", "cykel.jpg", "fiskespö.jpg", "lastbil.jpg", "flygplan.jpg", "giraff.jpg", "häst.jpg", "percy.png", "bill_callahan.jpg", "hiss.jpg", "pizza.jpg", "bamse.jpg", "buss.jpeg", "sko.jpg", "pappa.jpeg", "mamma.jpg", "farmor.jpg", "daniel_tiger.jpg", "alfons.jpg", "thomas_tåg.jpg"];
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Assignments from "./Assignments";
+import { approveAnswer, updateAnswer } from "./assignmentsActions";
 
 class AssignmentsContainer extends Component {
 
@@ -10,21 +11,8 @@ class AssignmentsContainer extends Component {
         this.onInputChange = this.onInputChange.bind(this)
     }
 
-    state = {
-        assignments: assignments,
-        nrOfRunsLeft: 20,
-        showAssignment: true,
-        currentText: "",
-        currentAssignment: AssignmentsContainer.pickRandom(assignments),
-        previousAssignment: ""
-    };
-
-    static pickRandom(a) {
-        return a[Math.floor(Math.random() * a.length)]
-    };
-
-    static targetText(currentAssignment) {
-        return currentAssignment.substring(0, currentAssignment.indexOf(".")).replace("_", " ");
+    static targetText(currentFilename) {
+        return currentFilename.substring(0, currentFilename.indexOf(".")).replace("_", " ");
     }
 
     onInputChange(event) {
@@ -33,38 +21,42 @@ class AssignmentsContainer extends Component {
     }
 
     handleWrittenText(writtenText) {
-        const {currentAssignment, assignments, nrOfRunsLeft} = this.state;
-        const targetText = AssignmentsContainer.targetText(currentAssignment);
+        const { targetText, updateAnswer, approveAnswer } = this.props;
         const upperCaseTargetText = targetText.toUpperCase();
         const upperCaseWrittenText = writtenText.toUpperCase();
         if (upperCaseTargetText === upperCaseWrittenText) {
-            const undoneAssignments = assignments.filter(assignment => assignment !== currentAssignment);
-            this.setState({
-                assignments: undoneAssignments,
-                currentText: "",
-                currentAssignment: AssignmentsContainer.pickRandom(undoneAssignments),
-                previousAssignment: writtenText,
-                showAssignment: false,
-                nrOfRunsLeft: nrOfRunsLeft - 1,
-            });
-            setTimeout(function () {
-                this.setState({showAssignment: true});
-            }.bind(this), 2000)
+            approveAnswer();
         } else if (upperCaseTargetText.startsWith(upperCaseWrittenText)) {
-            this.setState({
-                currentText: writtenText
-            });
+            updateAnswer(writtenText);
         }
     }
 
     render() {
         return (
             <Assignments
-                {...this.state}
+                {...this.props}
                 onChange={this.onInputChange}
             />
         )
     }
 }
 
-export default AssignmentsContainer;
+const mapStateToProps = state => ({
+    targetText: AssignmentsContainer.targetText(state.assignments.currentFilename),
+    previousText: AssignmentsContainer.targetText(state.assignments.previousFilename),
+    currentFilename: state.assignments.currentFilename,
+    previousFilename: state.assignments.previousFilename,
+    currentText: state.assignments.currentText,
+    showAssignment: state.assignments.showAssignment,
+    nrOfRunsLeft: state.assignments.nrOfRunsLeft
+});
+
+const mapDispatchToProps = dispatch => ({
+    approveAnswer: bindActionCreators(approveAnswer, dispatch),
+    updateAnswer: bindActionCreators(updateAnswer, dispatch)
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AssignmentsContainer)
