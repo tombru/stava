@@ -1,10 +1,5 @@
 import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentsActionTypes";
-
-const speakSwedish = (writtenText) => {
-    const msg = new SpeechSynthesisUtterance(writtenText);
-    msg.lang = 'sv-SE';
-    window.speechSynthesis.speak(msg);
-};
+import { speakSwedish } from "./speak"
 
 export const approveAnswer = (writtenText) => {
     return dispatch => {
