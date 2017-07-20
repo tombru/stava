@@ -1,6 +1,6 @@
 import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentsActionTypes";
 
-const assignments = ["vad gör pojken - han gråter.jpg","vad gör pojken - han skrattar.jpg", "vad gör flickan-hon borstar tänderna.jpg", "vad gör pojken-han springer.gif", "vad gör flickan-hon äter banan.jpg", "vad gör bill callahan-han spelar gitarr.jpg"];
+const assignments = ["vad gör flickan - hon badar.jpg", "vad gör dom-dom åker hiss.jpg", "vad gör hon-hon åker hiss.jpg", "vad gör dom-dom åker tunnelbana.jpeg", "vad gör pojken - han gråter.jpg","vad gör pojken - han skrattar.jpg", "vad gör flickan-hon borstar tänderna.jpg", "vad gör pojken-han springer.gif", "vad gör flickan-hon äter banan.jpg", "vad gör bill callahan-han spelar gitarr.jpg"];
 
 const pickRandom = (a) => {
     return a[Math.floor(Math.random() * a.length)] || "";
