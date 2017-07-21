@@ -11,21 +11,15 @@ const question = currentFilename => currentFilename.substring(0, currentFilename
 
 export const currentTextSelector = createSelector(
     getAssignments,
-    (assignments) => {
-        return targetText(assignments.currentFilename)
-    }
+    assignments => targetText(assignments.currentFilename)
 );
 
 export const previousTextSelector = createSelector(
     getAssignments,
-    (assignments) => {
-        return targetText(assignments.previousFilename)
-    }
+    assignments => targetText(assignments.previousFilename)
 );
 
 export const questionSelector = createSelector(
     getAssignments,
-    (assignments) => {
-        return question(assignments.currentFilename)
-    }
+    assignments => question(assignments.currentFilename)
 );
