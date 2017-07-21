@@ -12,21 +12,21 @@ const question = (currentFilename) => {
 };
 
 export const currentTextSelector = createSelector(
-    [ getAssignments ],
+    getAssignments,
     (assignments) => {
         return targetText(assignments.currentFilename)
     }
 );
 
 export const previousTextSelector = createSelector(
-    [ getAssignments ],
+    getAssignments,
     (assignments) => {
         return targetText(assignments.previousFilename)
     }
 );
 
 export const questionSelector = createSelector(
-    [ getAssignments ],
+    getAssignments,
     (assignments) => {
         return question(assignments.currentFilename)
     }
