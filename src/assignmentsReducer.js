@@ -1,9 +1,11 @@
+import { List } from "immutable"
 import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentsActionTypes";
 
-const assignments = ["vad gör flickan - hon badar.jpg", "vad gör dom-dom åker hiss.jpg", "vad gör hon-hon åker hiss.jpg", "vad gör dom-dom åker tunnelbana.jpeg", "vad gör pojken - han gråter.jpg","vad gör pojken - han skrattar.jpg", "vad gör flickan-hon borstar tänderna.jpg", "vad gör pojken-han springer.gif", "vad gör flickan-hon äter banan.jpg", "vad gör bill callahan-han spelar gitarr.jpg"];
+const assignments = List(["vad gör flickan - hon badar.jpg", "vad gör dom-dom åker hiss.jpg", "vad gör hon-hon åker hiss.jpg", "vad gör dom-dom åker tunnelbana.jpeg", "vad gör pojken - han gråter.jpg","vad gör pojken - han skrattar.jpg", "vad gör flickan-hon borstar tänderna.jpg", "vad gör pojken-han springer.gif", "vad gör flickan-hon äter banan.jpg", "vad gör bill callahan-han spelar gitarr.jpg"]);
 
 const pickRandom = (a) => {
-    return a[Math.floor(Math.random() * a.length)] || "";
+    const randomIndex = Math.floor(Math.random() * a.size);
+    return a.get(randomIndex) || "";
 };
 
 const nrOfRunsLeft = 40;
@@ -12,7 +14,7 @@ const initialState = {
     currentFilename: pickRandom(assignments),
     previousFilename: "",
     showAssignment: true,
-    nrOfRunsLeft: nrOfRunsLeft < assignments.length ?  nrOfRunsLeft: assignments.length,
+    nrOfRunsLeft: nrOfRunsLeft < assignments.size ?  nrOfRunsLeft: assignments.size,
     currentText: ""
 };
 
