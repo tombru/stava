@@ -1,5 +1,5 @@
 import { List } from "immutable"
-import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER, ASSIGNMENTS_FETCHED } from "./assignmentsActionTypes";
+import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER, ASSIGNMENT_FETCHED } from "./assignmentActionTypes";
 
 const assignments = List([]);
 
@@ -18,7 +18,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case ASSIGNMENTS_FETCHED:
+        case ASSIGNMENT_FETCHED:
             return {
                 ...state,
                 assignments: action.assignments,
@@ -26,11 +26,11 @@ export default (state = initialState, action) => {
             };
         case APPROVE_ANSWER:
             const { assignments, currentAssignment } = state;
-            const undoneAssignments = assignments.filter(assignment => assignment !== currentAssignment);
+            const undoneAssignment = assignments.filter(assignment => assignment !== currentAssignment);
             return {
                 ...state,
-                assignments: undoneAssignments,
-                currentAssignment: pickRandom(undoneAssignments),
+                assignments: undoneAssignment,
+                currentAssignment: pickRandom(undoneAssignment),
                 showAssignment: false,
                 currentText: "",
                 previousText: currentAssignment.targetText

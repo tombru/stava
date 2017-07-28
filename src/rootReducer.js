@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import assignments from "./assignmentsReducer";
+import assignment from "./assignmentReducer";
 
 export default combineReducers({
-    assignments
+    assignment
 });

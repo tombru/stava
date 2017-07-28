@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Assignments from "./Assignments";
-import { approveAnswer, updateAnswer, fetchAssignments } from "./assignmentsActions";
+import Assignment from "./Assignment";
+import { approveAnswer, updateAnswer, fetchAssignment } from "./assignmentActions";
 
-class AssignmentsContainer extends Component {
+class AssignmentContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -12,8 +12,8 @@ class AssignmentsContainer extends Component {
     }
 
     componentDidMount() {
-        const { fetchAssignments } = this.props;
-        fetchAssignments();
+        const { fetchAssignment } = this.props;
+        fetchAssignment();
     }
 
     onInputChange(event) {
@@ -35,7 +35,7 @@ class AssignmentsContainer extends Component {
 
     render() {
         return (
-            <Assignments
+            <Assignment
                 {...this.props}
                 onChange={this.onInputChange}
             />
@@ -44,19 +44,19 @@ class AssignmentsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    previousText: state.assignments.previousText,
-    currentAssignment: state.assignments.currentAssignment,
-    currentText: state.assignments.currentText,
-    showAssignment: state.assignments.showAssignment,
+    previousText: state.assignment.previousText,
+    currentAssignment: state.assignment.currentAssignment,
+    currentText: state.assignment.currentText,
+    showAssignment: state.assignment.showAssignment,
 });
 
 const mapDispatchToProps = dispatch => ({
     approveAnswer: bindActionCreators(approveAnswer, dispatch),
     updateAnswer: bindActionCreators(updateAnswer, dispatch),
-    fetchAssignments: bindActionCreators(fetchAssignments, dispatch)
+    fetchAssignment: bindActionCreators(fetchAssignment, dispatch)
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AssignmentsContainer)
+)(AssignmentContainer)

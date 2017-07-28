@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import AssignmentsContainer  from "./AssignmentsContainer";
+import AssignmentContainer  from "./AssignmentContainer";
 import { Provider } from "react-redux"
 import store from './configureStore'
 
@@ -8,7 +8,7 @@ function App() {
     return (
         <div className="App">
             <Provider store={store}>
-                <AssignmentsContainer />
+                <AssignmentContainer />
             </Provider>
         </div>
     )

@@ -1,27 +1,28 @@
-import React, { Component } from "react";
-import { speakSwedish } from "./speak"
+import React from "react";
+import Question from "./Question"
 
-class Assignment extends Component {
-
-    componentDidMount() {
-        this.nameInput.focus();
-        const { question }  = this.props;
-        speakSwedish(question);
-    }
-
-    render() {
-        const { currentText, question, link, onChange } = this.props;
-        return (
-            <div className="assignment">
-                <img src={link} alt={question || "n/a"}/>
-                <br/>
-                <input ref={(input) => {
-                    this.nameInput = input;
-                }} type="text" onChange={onChange} value={currentText}/>
-            </div>
-        )
-    }
-
+function Assignment({ currentAssignment, currentText, showAssignment, previousText, onChange }) {
+    return (
+        <div className="container">
+            {showAssignment &&
+                <span>
+                    {currentAssignment &&
+                        <Question
+                            questionText={currentAssignment.question}
+                            currentText={currentText}
+                            link={currentAssignment.link}
+                            onChange={onChange}
+                        />
+                    }
+                </span>
+            }
+            {!showAssignment &&
+                <div className="previousAssignment">
+                    <h1>{previousText}</h1>
+                </div>
+            }
+        </div>
+    )
 }
 
 export default Assignment;

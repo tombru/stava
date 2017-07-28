@@ -1,7 +1,7 @@
 import Dropbox from "dropbox";
 import { List } from "immutable"
 import { parseTargetText, parseQuestion, getKey } from "./UrlUtil"
-import { APPROVE_ANSWER, ASSIGNMENTS_FETCHED, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentsActionTypes";
+import { APPROVE_ANSWER, ASSIGNMENT_FETCHED, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentActionTypes";
 import { speakSwedish } from "./speak"
 
 export const approveAnswer = (writtenText) => {
@@ -18,7 +18,7 @@ export const approveAnswer = (writtenText) => {
     }
 };
 
-export const fetchAssignments = () => {
+export const fetchAssignment = () => {
     return dispatch => {
         const dbx = new Dropbox({ accessToken: getKey() });
         dbx.filesListFolder({ path: '/EoT/bilder-stava' })
@@ -37,7 +37,7 @@ export const fetchAssignments = () => {
                         }
                     });
                     dispatch({
-                        type: ASSIGNMENTS_FETCHED,
+                        type: ASSIGNMENT_FETCHED,
                         assignments: List(assignments)
                     })
                 })
