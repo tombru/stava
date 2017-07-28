@@ -10,10 +10,10 @@ class Assignment extends Component {
     }
 
     render() {
-        const { currentText, filename, onChange } = this.props;
+        const { currentText, question, link, onChange } = this.props;
         return (
             <div className="assignment">
-                <img src={filename} alt={filename || "n/a"}/>
+                <img src={link} alt={question || "n/a"}/>
                 <br/>
                 <input ref={(input) => {
                     this.nameInput = input;

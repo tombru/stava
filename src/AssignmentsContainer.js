@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Assignments from "./Assignments";
-import { approveAnswer, updateAnswer } from "./assignmentsActions";
-import { currentTextSelector, previousTextSelector, questionSelector } from "./assignmentsSelectors";
-
+import { approveAnswer, updateAnswer, fetchAssignments } from "./assignmentsActions";
 
 class AssignmentsContainer extends Component {
+
+    componentDidMount() {
+        const { fetchAssignments } = this.props;
+        fetchAssignments();
+    }
 
     constructor(props) {
         super(props);
@@ -19,7 +22,8 @@ class AssignmentsContainer extends Component {
     }
 
     handleWrittenText(writtenText) {
-        const { targetText, updateAnswer, approveAnswer } = this.props;
+        const { currentAssignment, updateAnswer, approveAnswer } = this.props;
+        const { targetText } = currentAssignment;
         const upperCaseTargetText = targetText.toUpperCase();
         const upperCaseWrittenText = writtenText.toUpperCase();
         if (upperCaseTargetText === upperCaseWrittenText) {
@@ -40,10 +44,8 @@ class AssignmentsContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    question: questionSelector(state),
-    targetText: currentTextSelector(state),
-    previousText: previousTextSelector(state),
-    currentFilename: state.assignments.currentFilename,
+    previousText: state.assignments.previousText,
+    currentAssignment: state.assignments.currentAssignment,
     previousFilename: state.assignments.previousFilename,
     currentText: state.assignments.currentText,
     showAssignment: state.assignments.showAssignment,
@@ -51,7 +53,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     approveAnswer: bindActionCreators(approveAnswer, dispatch),
-    updateAnswer: bindActionCreators(updateAnswer, dispatch)
+    updateAnswer: bindActionCreators(updateAnswer, dispatch),
+    fetchAssignments: bindActionCreators(fetchAssignments, dispatch)
 });
 
 export default connect(

@@ -1,29 +1,27 @@
 import React from "react";
 import Assignment from "./Assignment"
 
-function Assignments({ currentFilename, currentText, question, showAssignment, previousText, onChange }) {
+function Assignments({ currentAssignment, currentText, showAssignment, previousText, onChange }) {
     return (
-        <div className="container">
+        currentAssignment ? <div className="container">
             {showAssignment &&
-                <span>
-                    {currentFilename &&
-                            <span>
-                                <Assignment
-                                    question={question}
-                                    currentText={currentText}
-                                    filename={currentFilename}
-                                    onChange={onChange}
-                                />
-                            </span>}
-                    {!currentFilename && <h1>Slut!</h1>}
+            <span>
+                    <span>
+                        <Assignment
+                            question={currentAssignment.question}
+                            currentText={currentText}
+                            link={currentAssignment.link}
+                            onChange={onChange}
+                        />
+                    </span>
                 </span>
             }
             {!showAssignment &&
-                <div className="previousAssignment">
-                    <h1>{previousText}</h1>
-                </div>
+            <div className="previousAssignment">
+                <h1>{previousText}</h1>
+            </div>
             }
-        </div>
+        </div>: null
     )
 
 }

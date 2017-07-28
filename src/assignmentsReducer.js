@@ -1,18 +1,16 @@
 import { List } from "immutable"
-import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER } from "./assignmentsActionTypes";
+import { APPROVE_ANSWER, SHOW_ASSIGNMENT, UPDATE_ANSWER, ASSIGNMENTS_FETCHED } from "./assignmentsActionTypes";
 
 const assignments = List([]);
-// const assignments = List(["vad gör flickan - hon badar.jpg"]);
-// const assignments = List(["vad gör flickan - hon badar.jpg", "vad gör dom-dom åker hiss.jpg", "vad gör hon-hon åker hiss.jpg", "vad gör dom-dom åker tunnelbana.jpeg", "vad gör pojken - han gråter.jpg","vad gör pojken - han skrattar.jpg", "vad gör flickan-hon borstar tänderna.jpg", "vad gör pojken-han springer.gif", "vad gör flickan-hon äter banan.jpg", "vad gör bill callahan-han spelar gitarr.jpg"]);
 
 const pickRandom = (a) => {
     const randomIndex = Math.floor(Math.random() * a.size);
-    return a.get(randomIndex) || "";
+    return a.get(randomIndex);
 };
 
 const initialState = {
     assignments: assignments,
-    currentFilename: pickRandom(assignments),
+    currentAssignment: pickRandom(assignments),
     previousFilename: "",
     showAssignment: true,
     currentText: ""
@@ -20,16 +18,22 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case ASSIGNMENTS_FETCHED:
+            return {
+                ...state,
+                assignments: action.assignments,
+                currentAssignment: pickRandom(action.assignments)
+            };
         case APPROVE_ANSWER:
-            const { assignments, currentFilename } = state;
-            const undoneAssignments = assignments.filter(assignment => assignment !== currentFilename);
+            const { assignments, currentAssignment } = state;
+            const undoneAssignments = assignments.filter(assignment => assignment !== currentAssignment);
             return {
                 ...state,
                 assignments: undoneAssignments,
-                currentFilename: pickRandom(undoneAssignments),
+                currentAssignment: pickRandom(undoneAssignments),
                 showAssignment: false,
                 currentText: "",
-                previousFilename: currentFilename
+                previousText: currentAssignment.targetText
             };
         case SHOW_ASSIGNMENT:
             return {
