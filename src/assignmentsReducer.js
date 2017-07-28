@@ -11,7 +11,7 @@ const pickRandom = (a) => {
 const initialState = {
     assignments: assignments,
     currentAssignment: pickRandom(assignments),
-    previousFilename: "",
+    previousText: "",
     showAssignment: true,
     currentText: ""
 };

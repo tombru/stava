@@ -6,14 +6,14 @@ import { approveAnswer, updateAnswer, fetchAssignments } from "./assignmentsActi
 
 class AssignmentsContainer extends Component {
 
-    componentDidMount() {
-        const { fetchAssignments } = this.props;
-        fetchAssignments();
-    }
-
     constructor(props) {
         super(props);
         this.onInputChange = this.onInputChange.bind(this)
+    }
+
+    componentDidMount() {
+        const { fetchAssignments } = this.props;
+        fetchAssignments();
     }
 
     onInputChange(event) {
@@ -46,7 +46,6 @@ class AssignmentsContainer extends Component {
 const mapStateToProps = state => ({
     previousText: state.assignments.previousText,
     currentAssignment: state.assignments.currentAssignment,
-    previousFilename: state.assignments.previousFilename,
     currentText: state.assignments.currentText,
     showAssignment: state.assignments.showAssignment,
 });
