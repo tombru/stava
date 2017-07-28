@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Assignment from "./Assignment";
 import { approveAnswer, updateAnswer, fetchAssignment } from "./assignmentActions";
+import { previousTextSelector, currentAssignmentSelector, currentTextSelector, showAssignmentSelector } from "./assignmentSelector";
 
 class AssignmentContainer extends Component {
 
@@ -44,10 +45,10 @@ class AssignmentContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-    previousText: state.assignment.previousText,
-    currentAssignment: state.assignment.currentAssignment,
-    currentText: state.assignment.currentText,
-    showAssignment: state.assignment.showAssignment,
+    previousText: previousTextSelector(state),
+    currentAssignment: currentAssignmentSelector(state),
+    currentText: currentTextSelector(state),
+    showAssignment: showAssignmentSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({

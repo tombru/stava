@@ -5,8 +5,8 @@ class Question extends Component {
 
     componentDidMount() {
         this.nameInput.focus();
-        const { question }  = this.props;
-        speakSwedish(question);
+        const { questionText }  = this.props;
+        speakSwedish(questionText);
     }
 
     render() {
