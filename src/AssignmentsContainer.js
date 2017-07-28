@@ -47,7 +47,6 @@ const mapStateToProps = state => ({
     previousFilename: state.assignments.previousFilename,
     currentText: state.assignments.currentText,
     showAssignment: state.assignments.showAssignment,
-    nrOfRunsLeft: state.assignments.nrOfRunsLeft
 });
 
 const mapDispatchToProps = dispatch => ({

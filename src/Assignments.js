@@ -1,12 +1,12 @@
 import React from "react";
 import Assignment from "./Assignment"
 
-function Assignments({ currentFilename, currentText, question, showAssignment, nrOfRunsLeft, previousText, onChange }) {
+function Assignments({ currentFilename, currentText, question, showAssignment, previousText, onChange }) {
     return (
         <div className="container">
             {showAssignment &&
                 <span>
-                    {nrOfRunsLeft !== 0 &&
+                    {currentFilename &&
                             <span>
                                 <Assignment
                                     question={question}
@@ -14,9 +14,8 @@ function Assignments({ currentFilename, currentText, question, showAssignment, n
                                     filename={currentFilename}
                                     onChange={onChange}
                                 />
-                                <h4>{nrOfRunsLeft}</h4>
                             </span>}
-                    {nrOfRunsLeft === 0 && <h1>Slut!</h1>}
+                    {!currentFilename && <h1>Slut!</h1>}
                 </span>
             }
             {!showAssignment &&
